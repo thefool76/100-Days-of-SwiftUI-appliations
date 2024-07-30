@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:spotify_clone/presentation/auth/pages/signup_or_signin.dart';
 import 'package:spotify_clone/presentation/choose_mode/bloc/theme_cubit.dart';
 
 import '../../../common/widgets/button/basic_app_button.dart';
@@ -88,7 +89,7 @@ class ChooseMode extends StatelessWidget {
                             height: 15,
                           ),
                           const Text(
-                            'Dark Mode',
+                            'Light Mode',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,
@@ -127,7 +128,7 @@ class ChooseMode extends StatelessWidget {
                             ),
                           ),
                           const Text(
-                            'Light Mode',
+                            'Dark Mode',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,
@@ -144,7 +145,7 @@ class ChooseMode extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  const ChooseMode()));
+                                  const SignupOrSigninPage()));
                     },
                     title: 'Continue',
                   ),
