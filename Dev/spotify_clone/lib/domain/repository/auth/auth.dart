@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:spotify_clone/data/models/auth/create_user.dart';
+import 'package:spotify_clone/data/models/auth/signin_user.dart';
 
 abstract class AuthRepo {
-  Future<void> signup(CreateUser createUserReq);
+  Future<Either> signup(CreateUser createUserReq);
 
-  Future<void> signin();
+  Future<Either> signin(SigninUserReq signinUserReq);
 }

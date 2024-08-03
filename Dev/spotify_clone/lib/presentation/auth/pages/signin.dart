@@ -3,11 +3,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone/data/models/auth/signin_user.dart';
+import 'package:spotify_clone/domain/usecases/auth/signin.dart';
 import 'package:spotify_clone/presentation/auth/pages/signup.dart';
+import 'package:spotify_clone/presentation/root/pages/root.dart';
+
+import '../../../service_locator.dart';
 
 class SigninPage extends StatelessWidget {
-  const SigninPage({super.key});
-
+  SigninPage({super.key});
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +42,25 @@ class SigninPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            BasicAppButton(onPressed: () {}, title: 'Sign In')
+            BasicAppButton(
+                onPressed: () async {
+                  var result = await sl<SigninUseCase>().call(
+                      params: SigninUserReq(
+                          email: _email.text.toString(),
+                          password: _password.text.toString()));
+                  result.fold((l) {
+                    var snackbar = SnackBar(content: Text(l));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }, (r) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const RootPage()),
+                        (route) => false);
+                  });
+                },
+                title: 'Sign In')
           ],
         ),
       ),
@@ -53,6 +77,7 @@ class SigninPage extends StatelessWidget {
 
   Widget _emailField(BuildContext context) {
     return TextField(
+      controller: _email,
       decoration: const InputDecoration(hintText: "Enter Username Or Email")
           .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
@@ -60,6 +85,7 @@ class SigninPage extends StatelessWidget {
 
   Widget _passwordField(BuildContext context) {
     return TextField(
+      controller: _password,
       decoration: const InputDecoration(hintText: "Password")
           .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
@@ -85,7 +111,7 @@ class SigninPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          const SignupPage())); // Example navigation
+                          SignupPage())); // Example navigation
             },
             child: const Text(
               'Register Now',
