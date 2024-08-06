@@ -5,5 +5,6 @@ class AppVectors {
   static const String moon = '${basePath}moon.svg';
   static const String sun = '${basePath}sun.svg';
   static const String topPattern = '${basePath}top_pattern.svg';
-   static const String bottomPattern = '${basePath}bottom_pattern.svg';
+  static const String bottomPattern = '${basePath}bottom_pattern.svg';
+  static const String homeTopCard = '${basePath}home_card.svg';
 }
