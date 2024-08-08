@@ -5,6 +5,7 @@ import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
+import 'package:spotify_clone/presentation/home/widgets/news_songs.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -40,6 +41,18 @@ class _RootPageState extends State<RootPage>
           children: [
             _homeTopCard(),
             _tabs(),
+            SizedBox(
+              height: 260,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  const NewsSongs(),
+                  Container(),
+                  Container(),
+                  Container()
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -71,7 +84,7 @@ class _RootPageState extends State<RootPage>
     );
   }
 
-    Widget _tabs() {
+  Widget _tabs() {
     return TabBar(
       controller: _tabController,
       isScrollable: true,
@@ -83,31 +96,19 @@ class _RootPageState extends State<RootPage>
       tabs: const [
         Text(
           'News',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Videos',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Artists',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Podcasts',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         )
       ],
     );

@@ -25,7 +25,7 @@ class SongFirebaseServiceImpl implements SongFirebaseService {
       
       return Right(songs);
     } catch (e) {
-      return Left('An error occurred');
+      return const Left('An error occurred');
     }
   }
 }
