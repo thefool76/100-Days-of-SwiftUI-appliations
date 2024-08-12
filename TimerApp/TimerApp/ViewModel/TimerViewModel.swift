@@ -16,7 +16,7 @@ class TimerViewModel: NSObject, ObservableObject {
     @Published var displayTime: String = ""
     @Published var goalTime: Double = 0
     
-    private var time: Timer = Timer()
+    private var timer: Timer = Timer()
     
     // System sound object
     private var SoundID: SystemSoundID = 1407
@@ -36,6 +36,7 @@ class TimerViewModel: NSObject, ObservableObject {
         // if timer is completed we stop the session and play the sound.
         if progress >= 1 {
             stopSession()
+            makeSoundAndVibration()
         }
     }
     
@@ -52,7 +53,22 @@ class TimerViewModel: NSObject, ObservableObject {
     
     // Pause Session
     
-    func pauseSession
+    func pauseSession() {
+        timer.invalidate()
+    }
+    
+    func reset() {
+        seconds = 0
+        progress = 0
+    }
+}
+
+// public methods
+extension TimerViewModel {
+    func viewDidLoad() {
+        self.progress = seconds / Double(goalTime)
+        self.displayTime =  calculateDisplayTime()
+    }
 }
 
 extension TimerViewModel {
@@ -81,3 +97,12 @@ extension TimerViewModel {
 }
 
 
+// function plays sound
+extension TimerViewModel {
+    private func makeSoundAndVibration() {
+        AudioServicesPlayAlertSoundWithCompletion(SoundID, nil)
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {
+            
+        }
+    }
+}
