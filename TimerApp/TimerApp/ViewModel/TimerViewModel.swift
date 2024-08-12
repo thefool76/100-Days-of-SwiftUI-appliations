@@ -34,10 +34,25 @@ class TimerViewModel: NSObject, ObservableObject {
         print(progress)
         
         // if timer is completed we stop the session and play the sound.
-        if progress > = 1 {
-            
+        if progress >= 1 {
+            stopSession()
         }
     }
+    
+    // start Session
+    func startSession() {
+        print("Timer Started")
+        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.fireTimer), userInfo: nil, repeats: true)
+    }
+    
+    func stopSession() {
+        print("Timer Stopped")
+        timer.invalidate()
+    }
+    
+    // Pause Session
+    
+    func pauseSession
 }
 
 extension TimerViewModel {
