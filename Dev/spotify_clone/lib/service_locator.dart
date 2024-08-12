@@ -27,3 +27,5 @@ Future<void> initilizeDependecies() async {
 
   sl.registerSingleton<GetNewsSongsUseCase>(GetNewsSongsUseCase());
 }
+
+
